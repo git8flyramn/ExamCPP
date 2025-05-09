@@ -1,11 +1,17 @@
 #include "DxLib.h"
+#include "Input.h"
+#include "Enemys.h"
+#include "Player.h"
+#include "global.h"
 
 namespace
 {
-	//XGA SIZE
-	const int WIN_WIDTH = 1024;
-	const int WIN_HEIGHT = 768;
+	const int  BGCOLOR[3] = { 0,0,0 }; //背景色
+	int crrTime;
+	int prevTime;
 }
+
+float gDeltaTime = 0.0f; //フレーム間の時間差
 
 
 void DxInit()
@@ -15,7 +21,7 @@ void DxInit()
 	SetMainWindowText("TITLE");
 	SetGraphMode(WIN_WIDTH, WIN_HEIGHT, 32);
 	SetWindowSizeExtendRate(1.0);
-	SetBackgroundColor(255, 250, 205);
+	SetBackgroundColor(BGCOLOR[0],BGCOLOR[1],BGCOLOR[2]);
 
 	// ＤＸライブラリ初期化処理
 	if (DxLib_Init() == -1)
@@ -40,16 +46,38 @@ void MyGame()
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
 	DxInit();
-
+	crrTime = GetNowCount();
+	prevTime = GetNowCount();
+	Player* player = new Player();
+	Enemys* enemy = new Enemys[10];
+	for (int i = 0; i < 10; i++)
+	{
+		enemy[i].SetPos(100 + i * 50, 100);
+	}
 	while (true)
 	{
 		ClearDrawScreen();
-
+		Input::KeyStateUpdate();
+		crrTime = GetNowCount();//現在の時間を取得
+		//前回の時間との差分を計算
+		float deltaTime = (crrTime - prevTime) / 1000.0f;
+		gDeltaTime = deltaTime;
 		//ここにやりたい処理を書く
-
-
+		player->Update();
+		player->Draw();
+		for (int i = 0; i < 10; i++)
+		{
+			/*(enemy + i)->Update();
+			(enemy+i)->Draw();*/
+			enemy[i].Update();
+			enemy[i].Draw();
+		}
+		//(ここまでやりたい処理を書く)
+		
+		//裏画面の描画
 		ScreenFlip();
 		WaitTimer(16);
+		prevTime = crrTime; //現在の時間を前回の時間として保存
 		if (ProcessMessage() == -1)
 			break;
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
