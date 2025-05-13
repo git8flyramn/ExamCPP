@@ -1,6 +1,6 @@
 #include "Enemys.h"
 #include "DxLib.h"
-
+#include <string>
 namespace
 {
 	const int ENEMY_IMAGE_WIDTH = 48;
@@ -9,10 +9,31 @@ namespace
 	const int ENEMY_INIT_Y = 100;
 	const float ENEMY_INIT_SPEED = 100.0f;
 }
-Enemys::Enemys()
-	:GameObject(),hImage_(-1),x_(0),y_(0),speed_(0),isAlive_(true)
+//Enemys::Enemys()
+//	:GameObject(),hImage_(-1), 
+//	x_(0), y_(0), 
+//	speed_(0), 
+//	isAlive_(true)
+//{
+//
+//}
+Enemys::Enemys(int id, ETYPE type)
+	:GameObject(),hImage_(-1),x_(0),y_(0),speed_(0),isAlive_(true),ID_(id),type_(type)
 {
-	hImage_ = LoadGraph("Aseets/tiny_ship10.png");
+	ETYPE::ZAKO;  // 10番
+	ETYPE::MID;   // 16
+	ETYPE::KNIGHT;// 18
+	ETYPE::BOSS;   // 9
+	//画像の読み込み
+	std::string imgPath[MAX_ETYPE] =
+	{
+		"Aseets/tiny_ship10.png",
+		"Aseets/tiny_ship16.png",
+		"Aseets/tiny_ship18.png",
+		"Aseets/tiny_ship9.png"
+	};
+	hImage_ = LoadGraph(imgPath[type_].c_str());
+
 	if (hImage_ == -1)
 		//エラーが起きた時に発生する処理
 	{
@@ -21,6 +42,7 @@ Enemys::Enemys()
 	x_ = ENEMY_INIT_X;//初期座標
 	y_ = ENEMY_INIT_Y;//初期座標
 	speed_ = ENEMY_INIT_SPEED;//初期スピード
+	//idとtypeを指定されなかった時の処理を書く
 }
 
 Enemys::~Enemys()
