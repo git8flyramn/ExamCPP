@@ -2,32 +2,38 @@
 #include "DxLib.h"
 #include <string>
 #include "global.h"
+#include "Player.h"
+#include "GameObject.h"
 namespace {
 	const int BULLET_IMAGE_WIDTH = 13; //弾の画像の幅
-	const int BULLET_IMAGE_HEIGHT = 20;//弾の画像の高さ
-	const float BULLET_INIT_SPEED = 33; //弾のスピード
-	const std::string BULLET_IMAGE_PATH = "Assets//laserBlue03 1.png";
+	const int BULLET_IMAGE_HEIGHT = 33;//弾の画像の高さ
+	const float BULLET_INIT_SPEED = 200.0f; //弾のスピード
+	const std::string BULLET_IMAGE_PATH = "Aseets//laserBlue03.png";
+	//const std::string  BULLET_IMAGE_PATH = "Aseets//laserBlue07.png";
+	//const std::string  BULLET_IMAGE_PATH = "Aseets//laserBlue06.png";
+	//const std::string  BULLET_IMAGE_PATH = "Aseets//laserBlue01.png";
+
 
 }
 Bullet::Bullet()
 	:GameObject(), hImage_(-1),
 	x_(0), y_(0), speed_(0),
-	IsAlive_(true), isize_x(BULLET_IMAGE_WIDTH), isize_y(BULLET_IMAGE_HEIGHT)
+	isize_x(BULLET_IMAGE_WIDTH), isize_y(BULLET_IMAGE_HEIGHT)
 {
 	hImage_ = LoadGraph(BULLET_IMAGE_PATH.c_str()); //弾の画像を読み込む c_str = ｃの配列としてstring持ってくる
 	speed_ = BULLET_INIT_SPEED; //移動速度
+	isAlive_ = true;
 	AddGameObject(this);
 }
 
 Bullet::Bullet(float x, float y)
 	:GameObject(), hImage_(-1),
-	x_(0), y_(0), speed_(0),
-	IsAlive_(true), isize_x(BULLET_IMAGE_WIDTH), isize_y(BULLET_IMAGE_HEIGHT)
+	x_(x), y_(y), speed_(0),
+	isize_x(BULLET_IMAGE_WIDTH), isize_y(BULLET_IMAGE_HEIGHT)
 {
-	x_ = x;
-	y_ = y;
 	hImage_ = LoadGraph(BULLET_IMAGE_PATH.c_str()); //弾の画像を読み込む c_str = ｃの配列としてstring持ってくる
 	speed_ = BULLET_INIT_SPEED; //移動速度	
+	isAlive_ = true; //ゲームオブジェクトがいきているかどうか
 	AddGameObject(this);
 }
 
@@ -46,15 +52,15 @@ void Bullet::Update()
 	y_ = y_ - (speed_ * dt); //弾の移動
 	if (y_ < 0)
 	{
-		IsAlive_ = false; //画面外にでたら弾を消す
+		isAlive_ = false; //画面外にでたら弾を消す
 	}
 }
 
 void Bullet::Draw()
 {
-	if (IsAlive_)
+	if (isAlive_)
 	{
-		DrawExtendGraph(x_, y_, x_ + isize_x, y_ + isize_y, hImage_, TRUE);//弾の描画
+ 		DrawExtendGraph(x_, y_, x_ + isize_x, y_ + isize_y, hImage_, TRUE);//弾の描画
 	}
 }
 

@@ -11,6 +11,9 @@ namespace
 	const int PLAYER_BASE_MARSIN = 32; //ƒvƒŒƒCƒ„[‚ÌŠî€ƒ}[ƒWƒ“
 	const float PLAYER_INIT_X = WIN_WIDTH / 2 - PLAYER_IMAGE_WIDTH / 2;
 	const float PLAYER_INIT_Y = WIN_HEIGHT - PLAYER_IMAGE_HEIGHT - PLAYER_BASE_MARSIN;
+	const int BULLET_IMAGE_MARZIN = 17; //’e‚Ì‰æ‘œ‚Ìƒ}[ƒWƒ“
+	// PW/ 2 - BW / 2 = BULLET_IMAGE_MARZIN
+	const float BULLET_INTERVAL = 0.5f; //’e‚Ì”­ŽËŠÔŠu
 }
 
 
@@ -46,10 +49,21 @@ void Player::Update()
 	{
 		x_ = x_ + speed_  * dt;
 	}
-	if (Input::IsKeyDown(KEY_INPUT_SPACE))
+	static float bulletTimer = 0.0f; //’e‚Ì”­ŽËƒ^ƒCƒ}[
+	
+	if (bulletTimer > 0.0f)
 	{
-		new Bullet(x_, y_); //’e‚ð”­ŽË
+		bulletTimer -= dt;
 	}
+	if (Input::IsKeyDown(KEY_INPUT_SPACE)) 
+	{
+		if (bulletTimer <= 0.0f)
+		{
+			new Bullet(x_ + BULLET_IMAGE_MARZIN, y_); //’e‚ð”­ŽË
+			bulletTimer = BULLET_INTERVAL; //’e‚Ì”­ŽËŠÔŠu‚ðƒŠƒZƒbƒg
+		}
+	}
+		
 }
 
 void Player::Draw()

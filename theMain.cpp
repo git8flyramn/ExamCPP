@@ -78,16 +78,27 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
 		}
 		
-
 		//gameObjectsの更新
 		for (auto& obj : gameObjects)
-		{
-			obj->Update();
+		{ 
+			obj->Update(); //ゲームオブジェクトの更新
 		}
 		//gameObjectsの描画
 		for (auto& obj : gameObjects)
 		{
-			obj->Draw();
+			obj->Draw(); //ゲームオブジェクトの描画
+		}
+		for (auto it = gameObjects.begin(); it != gameObjects.end();)
+		{
+			if (!(*it)->IsAlive())
+			{
+				delete* it; //ゲームオブジェクトを削除
+				it = gameObjects.erase(it); //ベクター(配列)から要素を消去
+			}
+			else
+			{
+				it++;
+			}
 		}
 		
 		//裏画面の描画

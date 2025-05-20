@@ -2,11 +2,14 @@
 #include <vector>
 class GameObject
 {
+protected:
+	bool isAlive_; //ゲームオブジェクトが生きているかどうか
 public:
 	         GameObject();
 	virtual ~GameObject();
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	bool IsAlive(){ return isAlive_; } 
 };
 extern std::vector<GameObject*> gameObjects;
 extern std::vector<GameObject*> newObjects;
