@@ -11,21 +11,22 @@ namespace
 Stage::Stage()
     :GameObject(),player_(nullptr)
 {
+    AddGameObject(this); //ステージオブジェクトをゲームオブジェクトに追加
     player_ = new Player(); //プレイヤーオブジェクト
     enemy_ = std::vector<Enemys*>(ENEMY_NUM);
   
-       
-    for (int i = 0; i < ENEMY_NUM; i++)
+    
+
+    for (int i = 0; i < ENEMY_NUM; i++) //敵をENEMY_NUMの数だけ描画させる
     {
         int col = i % ENEMY_COL_SIZE;//列
         int row = i / ENEMY_COL_SIZE;//行
         ETYPE enemytype[ENEMY_ROW_SIZE] = {BOSS,KNIGHT,MID,ZAKO,ZAKO,ZAKO};
         enemy_[i] = new Enemys(i,enemytype[row]); //敵のオブジェクトの生成
-        enemy_[i]->SetPos(col * 55, row * 50);
-        //enemy_[1]->
+        enemy_[i]->SetPos(col * 55, row * 50); //敵の初期位置
+
 
     }
-    //i% ENEMY_ROW_SIZE * 50
 }
 
 
@@ -45,7 +46,7 @@ void Stage::Update()
 void Stage::Draw()
 {
     player_->Draw(); //playerの描画
-    // enemyの事を表すのにelmとして
+    // enemyの事を表すのにelmに置き換える
     for (auto& elm : enemy_)
     {
         elm->Draw();//敵の描画

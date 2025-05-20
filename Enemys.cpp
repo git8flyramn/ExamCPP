@@ -20,10 +20,10 @@ namespace
 Enemys::Enemys(int id, ETYPE type)
 	:GameObject(),hImage_(-1),x_(0),y_(0),speed_(0),isAlive_(true),ID_(id),type_(type)
 {
-	ETYPE::ZAKO;  // 10番
-	ETYPE::MID;   // 16
-	ETYPE::KNIGHT;// 18
-	ETYPE::BOSS;   // 9
+	//ETYPE::ZAKO;  // 10番
+	//ETYPE::MID;   // 16
+	//ETYPE::KNIGHT;// 18
+	//ETYPE::BOSS;   // 9
 	//画像の読み込み
 	std::string imgPath[MAX_ETYPE] =
 	{
@@ -42,6 +42,7 @@ Enemys::Enemys(int id, ETYPE type)
 	x_ = ENEMY_INIT_X;//初期座標
 	y_ = ENEMY_INIT_Y;//初期座標
 	speed_ = ENEMY_INIT_SPEED;//初期スピード
+	AddGameObject(this);
 	//idとtypeを指定されなかった時の処理を書く
 }
 

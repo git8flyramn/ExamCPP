@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "global.h"
 #include "Input.h"
+#include "Bullet.h"
 namespace
 {
 	const float PLAYER_INIT_SPEED = 200.0f; //‰ŠúˆÚ“®‘¬“x
@@ -25,6 +26,7 @@ Player::Player()
 	x_ = PLAYER_INIT_X;//‰ŠúÀ•W
 	y_ = PLAYER_INIT_Y;
 	speed_ = PLAYER_INIT_SPEED;
+	AddGameObject(this);
 }
 
 Player::~Player()
@@ -43,6 +45,10 @@ void Player::Update()
 	if (Input::IsKeepKeyDown(KEY_INPUT_RIGHT))
 	{
 		x_ = x_ + speed_  * dt;
+	}
+	if (Input::IsKeyDown(KEY_INPUT_SPACE))
+	{
+		new Bullet(x_, y_); //’e‚ğ”­Ë
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <vector>
 
-class Player; //前方宣言
+class Player; //前方宣言　
 class Enemys;//前方宣言
 
 class Stage :
