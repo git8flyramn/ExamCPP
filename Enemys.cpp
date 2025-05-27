@@ -1,5 +1,6 @@
 #include "Enemys.h"
 #include "DxLib.h"
+#include "global.h"
 #include <string>
 namespace
 {
@@ -18,7 +19,8 @@ namespace
 //
 //}
 Enemys::Enemys(int id, ETYPE type)
-	:GameObject(),hImage_(-1),x_(0),y_(0),speed_(0),isAlive_(true),ID_(id),type_(type)
+	:GameObject(),hImage_(-1),x_(0),y_(0),
+	speed_(0),ID_(id),type_(type)
 {
 	//ETYPE::ZAKO;  // 10”Ô
 	//ETYPE::MID;   // 16
@@ -60,5 +62,7 @@ void Enemys::Update()
 
 void Enemys::Draw()
 {
-	DrawExtendGraph(x_,y_,x_+ ENEMY_IMAGE_WIDTH ,y_+ ENEMY_IMAGE_HEIGHT, hImage_, TRUE);
+	DrawExtendGraphF(x_,y_,
+		              x_+ ENEMY_IMAGE_WIDTH ,y_+ ENEMY_IMAGE_HEIGHT,
+		            hImage_, TRUE);
 }

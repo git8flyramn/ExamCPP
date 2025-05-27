@@ -23,7 +23,7 @@ Stage::Stage()
         int row = i / ENEMY_COL_SIZE;//s
         ETYPE enemytype[ENEMY_ROW_SIZE] = {BOSS,KNIGHT,MID,ZAKO,ZAKO,ZAKO};
         enemy_[i] = new Enemys(i,enemytype[row]); //“G‚ÌƒIƒuƒWƒFƒNƒg‚Ì¶¬
-        enemy_[i]->SetPos(col * 55, row * 50); //“G‚Ì‰ŠúˆÊ’u
+        enemy_[i]->SetPos(col * 55.0, row * 50.0); //“G‚Ì‰ŠúˆÊ’u
 
 
     }
@@ -36,19 +36,8 @@ Stage::~Stage()
 
 void Stage::Update()
 {
-    player_->Update(); //player‚ÌXV
-    for (auto& i : enemy_)
-    {
-        i->Update(); //“G‚ÌXV
-    }
 }
 
 void Stage::Draw()
 {
-    player_->Draw(); //player‚Ì•`‰æ
-    // enemy‚ÌŽ–‚ð•\‚·‚Ì‚Éelm‚É’u‚«Š·‚¦‚é
-    for (auto& elm : enemy_)
-    {
-        elm->Draw();//“G‚Ì•`‰æ
-    }
 }
