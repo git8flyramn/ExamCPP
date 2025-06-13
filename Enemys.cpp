@@ -14,10 +14,10 @@ namespace
 
 
 Enemys::Enemys()
-       :GameObject(),hImage_(-1),x_(0),y_(0),speed_(0),
-	    imageSize_({ENEMY_IMAGE_WIDTH,ENEMY_IMAGE_HEIGHT})
+	:GameObject(), hImage_(-1), x_(0), y_(0), speed_(0),
+	imageSize_({ ENEMY_IMAGE_WIDTH,ENEMY_IMAGE_HEIGHT })
 {
-	hImage_ = LoadGraph("Assets/tiny_ship10.png");
+	hImage_ = LoadGraph("Aseets//tiny_ship10.png");
 	if (hImage_ == -1)
 	{
 
@@ -42,10 +42,10 @@ Enemys::Enemys(int id, ETYPE type)
 	//ETYPE::BOSS = > "Assets/tiny_ship9.png"
 	// ‰æ‘œ‚Ì“Ç‚İ‚İ
 	std::string imagePath[MAX_ETYPE] = {
-		"Assets/tiny_ship10.png", // ZAKO
-		"Assets/tiny_ship18.png", // MID
-		"Assets/tiny_ship16.png", // KNIGHT
-		"Assets/tiny_ship9.png"   // BOSS
+		"Aseets//tiny_ship10.png", // ZAKO
+		"Aseets//tiny_ship18.png", // MID
+		"Aseets//tiny_ship16.png", // KNIGHT
+		"Aseets//tiny_ship9.png"   // BOSS
 	};
 	moveTime_ = 0.0f;
 	hImage_ = LoadGraph(imagePath[type_].c_str()); // “G‚Ì‰æ‘œ‚ğ“Ç‚İ‚Ş
@@ -72,13 +72,13 @@ Enemys::~Enemys()
 
 void Enemys::Update()
 {
-	
+
 	static float beamTimer = 3.0f;
 
 	float period = 10.0f;
 	float omega = 2.0f * 3.14159265f / period;
 	moveTime_ = moveTime_ + GetDeltaTime();
-	x_ = xorigin_ + xMoveMax_ / 2.0 * sinf(omega * moveTime_);
+	x_ = xorigin_ + xMoveMax_ / 2.0 * sinf(omega * moveTime_ );
 	y_ = y_;
 	if (beamTimer < 0)
 	{
@@ -90,7 +90,7 @@ void Enemys::Update()
 
 void Enemys::Draw()
 {
-	DrawExtendGraphF(x_,y_,
-		              x_+ ENEMY_IMAGE_WIDTH ,y_+ ENEMY_IMAGE_HEIGHT,
-		            hImage_, TRUE);
+	DrawExtendGraphF(x_, y_,
+		x_ + ENEMY_IMAGE_WIDTH, y_ + ENEMY_IMAGE_HEIGHT,
+		hImage_, TRUE);
 }

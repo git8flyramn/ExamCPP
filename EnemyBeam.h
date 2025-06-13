@@ -26,4 +26,3 @@ private:
     //int isize_x, isize_y; //画像の表示サイズ
     bool isFired_; //発射されているかどうか true:発射されている
 };
-

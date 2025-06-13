@@ -8,12 +8,12 @@ namespace
 	const std::string EIMGE_PATH = "Aseets/explosion.png";
 	const int MAX_FRAME = 9;//画像の分割
 	const int DIV_NUM = 3;//画像の分割数
-    //frame_ アニメの総時間の初期値
-    const float FRAME_TIME = ANIME_TIME / MAX_FRAME;
+	//frame_ アニメの総時間の初期値
+	const float FRAME_TIME = ANIME_TIME / MAX_FRAME;
 }
-Effect::Effect(Point _pos) :GameObject(), pos_({_pos.x,_pos.y}),
-                           animtime_(ANIME_TIME),hImage_(std::vector<int>(MAX_FRAME,-1)),
-	                       frametimer_(FRAME_TIME),frame_(0)
+Effect::Effect(Point _pos) :GameObject(), pos_({ _pos.x,_pos.y }),
+animtime_(ANIME_TIME), hImage_(std::vector<int>(MAX_FRAME, -1)),
+frametimer_(FRAME_TIME), frame_(0)
 {
 	//animtime_ = GetNowCount();
 
@@ -56,9 +56,9 @@ void Effect::Update()
 
 void Effect::Draw()
 {
-	
-		DrawExtendGraphF(pos_.x, pos_.y,
-			pos_.x + EFFECT_IMAGE_SIZE, pos_.y + EFFECT_IMAGE_SIZE, hImage_[frame_], TRUE);
 
-	
+	DrawExtendGraphF(pos_.x, pos_.y,
+		pos_.x + EFFECT_IMAGE_SIZE, pos_.y + EFFECT_IMAGE_SIZE, hImage_[frame_], TRUE);
+
+
 }

@@ -1,4 +1,3 @@
-#pragma once
 #include "GameObject.h"
 #include "global.h"
 #include  <vector>
@@ -18,4 +17,3 @@ private:
     int frame_;
     float frametimer_;
 };
-

@@ -1,7 +1,5 @@
 #include "Player.h"
 #include "DxLib.h"
-#include "Player.h"
-#include "DxLib.h"
 #include "global.h"
 #include "Input.h"
 #include "Bullet.h"
@@ -11,6 +9,7 @@ namespace
 	const int PLAYER_IMAGE_WIDTH  = 48;
 	const int PLAYER_IMAGE_HEIGHT = 48;
 	const int PLAYER_BASE_MARSIN = 32; //プレイヤーの基準マージン
+
 	const float PLAYER_INIT_X = WIN_WIDTH / 2 - PLAYER_IMAGE_WIDTH / 2;
 	const float PLAYER_INIT_Y = WIN_HEIGHT - PLAYER_IMAGE_HEIGHT - PLAYER_BASE_MARSIN;
 	const int BULLET_IMAGE_MARZIN = 17; //弾の画像のマージン
@@ -24,7 +23,7 @@ namespace
 Player::Player()
 	:GameObject(), hImage_(-1), x_(0), y_(0), speed_(0),imageSize_({ PLAYER_IMAGE_WIDTH ,PLAYER_IMAGE_HEIGHT})
 {
-	hImage_ = LoadGraph("Aseets/tiny_ship5.png");
+	hImage_ = LoadGraph("Aseets//tiny_ship5.png");
 	if (hImage_ == -1)
 		 //エラーが起きた時に発生する処理
 	{

@@ -7,19 +7,19 @@ namespace
 	const float ENEMY_BEAM_INIT_SPEED = 250.0f;
 }
 EnemyBeam::EnemyBeam()
-	:GameObject(), hImage_(-1), pos_({-10,-10}), speed_(ENEMY_BEAM_INIT_SPEED),
-	isFired_(true),imageSize_({ ENEMY_BEAM_IMAGE_WIDTH, ENEMY_BEAM_IMAGE_HEIGHT })
+	:GameObject(), hImage_(-1), pos_({ -10,-10 }), speed_(ENEMY_BEAM_INIT_SPEED),
+	isFired_(true), imageSize_({ ENEMY_BEAM_IMAGE_WIDTH, ENEMY_BEAM_IMAGE_HEIGHT })
 {
-	hImage_ = LoadGraph("Assets/ebeam.png");
+	hImage_ = LoadGraph("Aseets/ebeam.png");
 
 	AddGameObject(this);
 }
 
 EnemyBeam::EnemyBeam(float x, float y)
-	:GameObject(), hImage_(-1), pos_({x,y}), speed_(ENEMY_BEAM_INIT_SPEED),
+	:GameObject(), hImage_(-1), pos_({ x,y }), speed_(ENEMY_BEAM_INIT_SPEED),
 	isFired_(true), imageSize_({ ENEMY_BEAM_IMAGE_WIDTH, ENEMY_BEAM_IMAGE_HEIGHT })
 {
-	hImage_ = LoadGraph("Assets/ebeam.png");
+	hImage_ = LoadGraph("Aseets/ebeams.png");
 	AddGameObject(this);
 }
 
@@ -28,7 +28,7 @@ EnemyBeam::EnemyBeam(Point pos_)
 	pos_({ pos_.x,pos_.y }), speed_(ENEMY_BEAM_INIT_SPEED),
 	isFired_(true), imageSize_({ ENEMY_BEAM_IMAGE_WIDTH ,ENEMY_BEAM_IMAGE_HEIGHT })
 {
-	hImage_ = LoadGraph("Assets/ebeam.png");
+	hImage_ = LoadGraph("Aseets/ebeams.png");
 	AddGameObject(this);
 }
 
@@ -44,7 +44,7 @@ EnemyBeam::~EnemyBeam()
 void EnemyBeam::Update()
 {
 	float dt = GetDeltaTime();
-	pos_.y = pos_.y + speed_ * dt; //’e‚ÌˆÚ“®
+	pos_.y = pos_.y + speed_ * dt;
 	if (pos_.y > WIN_HEIGHT)
 	{
 		isFired_ = false;

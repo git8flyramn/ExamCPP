@@ -41,7 +41,7 @@ Stage::Stage()
         enemy_[i]->SetXorigin(col * ENEMY_ALIGN_X + ENEMY_LEFT_MARGIN);
 
     }
-    hBackGround = LoadGraph("Aseets/bg.png");
+    hBackGround = LoadGraph("Aseets///bg.png");
 
 
 }

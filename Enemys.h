@@ -4,7 +4,7 @@
 #include  <vector>
 enum ETYPE
 {
-    ZAKO,MID,KNIGHT,BOSS,MAX_ETYPE
+    ZAKO, MID, KNIGHT, BOSS, MAX_ETYPE
 };
 class Enemys :
     public GameObject
