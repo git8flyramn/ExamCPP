@@ -133,6 +133,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EnemyBeam.cpp" />
     <ClCompile Include="Enemys.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -142,6 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EnemyBeam.h" />
     <ClInclude Include="Enemys.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="global.h" />

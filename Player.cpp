@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "DxLib.h"
+#include "Player.h"
+#include "DxLib.h"
 #include "global.h"
 #include "Input.h"
 #include "Bullet.h"
@@ -20,7 +22,7 @@ namespace
 
 
 Player::Player()
-	:GameObject(), hImage_(-1), x_(0), y_(0), speed_(0)
+	:GameObject(), hImage_(-1), x_(0), y_(0), speed_(0),imageSize_({ PLAYER_IMAGE_WIDTH ,PLAYER_IMAGE_HEIGHT})
 {
 	hImage_ = LoadGraph("Aseets/tiny_ship5.png");
 	if (hImage_ == -1)
@@ -33,7 +35,7 @@ Player::Player()
 	speed_ = PLAYER_INIT_SPEED;
 	for (int i = 0; i < PLAYER_BULLET_NUM; i++)
 	{
-		bullets_.push_back(new Bullet()); //弾のベクターを初期化
+		bullets_.push_back(new Bullet(-10,-10)); //弾のベクターを初期化
 	}
 		AddGameObject(this);
 }
@@ -45,15 +47,21 @@ Player::~Player()
 
 void Player::Update()
 {
+	Point nextP = {x_,y_};
 	float dt = GetDeltaTime(); //フレーム間の時間差を取得
 	if (Input::IsKeepKeyDown(KEY_INPUT_LEFT))
 	{
-		x_ = x_ - speed_ * dt;
+		nextP.x = x_ - speed_ * dt;
 		
 	}
 	if (Input::IsKeepKeyDown(KEY_INPUT_RIGHT))
 	{
-		x_ = x_ + speed_  * dt;
+		nextP.x = x_ + speed_  * dt;
+	}
+	if (nextP.x >= 0 && (nextP.x + PLAYER_IMAGE_WIDTH) <= WIN_WIDTH )
+	{
+		x_ = nextP.x;
+		y_ = nextP.y;
 	}
 	static float bulletTimer = 0.0f; //弾の発射タイマー
 	
@@ -66,9 +74,9 @@ void Player::Update()
 		if (bulletTimer <= 0.0f)
 		{
 			
-			Player::Shoot(); //弾を発射
-			Player::GetActiveBullet();
-			new Bullet(x_ + BULLET_IMAGE_MARZIN, y_); //弾を発射
+			Shoot(); //弾を発射
+			
+			//new Bullet(x_ + BULLET_IMAGE_MARZIN, y_); //弾を発射
 			bulletTimer = BULLET_INTERVAL; //弾の発射間隔をリセット
 		}
 	}
@@ -85,15 +93,15 @@ void Player::Draw()
 //弾を打つ関数
 void Player::Shoot()
 {
-	for (auto& itr : bullets_)
-	{
-		if (itr->IsFired() == false)
-		{
-			itr->SetPos(x_ + BULLET_IMAGE_MARZIN, y_); //弾の位置の確認
-			itr->SetFired(true); //発射状態にする
-			break; //一つ発射したらループを抜ける
-		}
-	}
+	//for (auto& itr : bullets_)
+	//{
+	//	if (itr->IsFired() == false)
+	//	{
+	//		itr->SetPos(x_ + BULLET_IMAGE_MARZIN, y_); //弾の位置の確認
+	//		itr->SetFired(true); //発射状態にする
+	//		break; //一つ発射したらループを抜ける
+	//	}
+	//}
 	Bullet* bit = GetActiveBullet();
 	if (bit != nullptr)
 	{

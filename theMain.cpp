@@ -64,8 +64,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 		//ここにやりたい処理を書く
-		//stage->Update(); //stageの更新
-		//stage->Draw();   //stageの描画
 		//(ここまでやりたい処理を書く)
 		//ゲームオブジェクトの追加
 		if (newObjects.size() > 0)
