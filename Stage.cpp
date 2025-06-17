@@ -24,13 +24,12 @@ namespace
     }
 }
 Stage::Stage()
-    :GameObject(),player_(nullptr),hBackGround(-1),Enemy_(nullptr),PBullet_(nullptr)
+    :GameObject(),player_(nullptr),hBackGround(-1)
 {
     AddGameObject(this); //ステージオブジェクトをゲームオブジェクトに追加
     player_ = new Player(); //プレイヤーオブジェクト
     enemy_ = std::vector<Enemys*>(ENEMY_NUM);
-    Enemy_ = new Enemys();
-    Player_ = std::vector<Player*>(PLAYER_NUM);
+   
    
 
     
@@ -59,48 +58,29 @@ Stage::~Stage()
 void Stage::Update()
 {
     //ここに当たり判定を描きたい
-       std::vector<Bullet*> bullets = player_->GetAllBullets();
-       std::vector<Bullet*> ebullets = Enemy_->GetAll_ENEMY_Bullets();
-        for (auto& e : enemy_)
-        {
-            for (auto& b : bullets)
-            {
-                if (b->IsFired() && e->IsAlive()) {
-                    if (IntersepctRect(e->GetRect(), b->GetRect()))
-                    {
-                        if (b->IsFired())
-                        {
-                            b->SetFired(false);
-                            if (e->IsAlive())
-                            {
-                                e->SetAlive(false);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        for (auto& p : Player_)
-        {
 
-            for (auto& b : ebullets)
-            {
-                if (b->IsFired() && p->IsAlive()) {
-                    if (IntersepctRect(p->GetRect(), b->GetRect()))
+    std::vector<Bullet*> bullets = player_->GetAllBullets();
+    for (auto& e : enemy_)
+    {
+        for (auto& b : bullets)
+        {
+            if (b->IsFired() && e->IsAlive()) {
+                if (IntersepctRect(e->GetRect(), b->GetRect()))
+                {
+                    if (b->IsFired())
                     {
-                        if (b->IsFired())
+                        b->SetFired(false);
+                        if (e->IsAlive())
                         {
-                            b->SetFired(false);
-                            if (p->IsAlive())
-                            {
-                                p->SetAlive(false);
-                            }
+                            e->SetAlive(false);
                         }
                     }
                 }
             }
         }
-  }
+    }
+  
+} 
 
 void Stage::Draw()
 {

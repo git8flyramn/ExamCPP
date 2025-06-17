@@ -17,11 +17,10 @@ public:
     void Update() override;
     void Draw() override;
     void SetPos(float x, float y) { x_ = x; y_ = y; } //“G‚ÌÀ•W‚ğİ’è
-    Rect GetRect() const { return { x_, y_, imageSize_.x, imageSize_.y }; } // “G‚Ì‹éŒ`‚ğæ“¾	
+    Rect GetRect() const { return { x_, y_, imageSize_.x, imageSize_.y }; }// “G‚Ì‹éŒ`‚ğæ“¾	
     //void SetID(int id) { ID_ = id; } //“G‚ÌID‚ğİ’è
     void SetMaxMoveX(float xmax) { xMoveMax_ = xmax; }
     void SetXorigin(float x) { xorigin_ = x; }
-    std::vector<Bullet*> GetAll_ENEMY_Bullets() const { return ebullets_; } //‘S‚Ä‚Ì’e‚ğæ“¾
 private:
     int hImage_;  //“G‚Ì‰æ‘œƒnƒ“ƒhƒ‹
     float x_, y_; //“G‚ÌÀ•W
@@ -30,8 +29,7 @@ private:
     float xorigin_;
     float moveTime_;
     Point imageSize_;
-    std::vector<Bullet*> ebullets_;
     int ID_; //“G‚ÌID
     ETYPE type_; //“G‚Ìí—Ş
-   
+
 };

@@ -41,11 +41,7 @@ Player::Player()
 
 Player::~Player()
 {
-	//画像サイズを解放(後で書く)
-	if (hImage_ != -1)
-	{
-		DeleteGraph(hImage_);//画像のハンドルを解放
-	}
+	//画像サイズを解放(後で書く
 }
 
 void Player::Update()

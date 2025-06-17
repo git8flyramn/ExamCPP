@@ -3,6 +3,7 @@
 #include <string>
 #include "Effect.h"
 #include "EnemyBeam.h"
+#include "Bullet.h"
 namespace
 {
 	const int ENEMY_IMAGE_WIDTH = 48;
@@ -10,6 +11,7 @@ namespace
 	const int ENEMY_INIT_X = 100;
 	const int ENEMY_INIT_Y = 100;
 	const float ENEMY_INIT_SPEED = 100.0f;
+	const int ENEMY_BULLET_NUM = 100;
 }
 
 
@@ -94,3 +96,4 @@ void Enemys::Draw()
 		x_ + ENEMY_IMAGE_WIDTH, y_ + ENEMY_IMAGE_HEIGHT,
 		hImage_, TRUE);
 }
+

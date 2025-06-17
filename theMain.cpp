@@ -3,7 +3,7 @@
 #include "global.h"
 #include <vector>
 #include "Stage.h"
-
+#include "GameObject.h"
 
 enum STATE
 {
@@ -88,49 +88,51 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		if (state == PLAY)
 		{
 			if (newObjects.size() > 0)
-		{
-			for (auto& obj : newObjects)
 			{
-				gameObjects.push_back(obj); //新しいゲームオブジェクトを追加
+				for (auto& obj : newObjects)
+				{
+					gameObjects.push_back(obj); //新しいゲームオブジェクトを追加
 
+				}
+				newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
 			}
-			newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
-		}
 
-		//gameObjectsの更新
-		for (auto& obj : gameObjects)
-		{
-			obj->Update(); //ゲームオブジェクトの更新
-		}
-		//gameObjectsの描画
-		for (auto& obj : gameObjects)
-		{
-			obj->Draw(); //ゲームオブジェクトの描画
-		}
-		for (auto it = gameObjects.begin(); it != gameObjects.end();)
-		{
-			if (!(*it)->IsAlive())
+			//gameObjectsの更新
+			for (auto& obj : gameObjects)
 			{
-				delete* it; //ゲームオブジェクトを削除
-				it = gameObjects.erase(it); //ベクター(配列)から要素を消去
+				obj->Update(); //ゲームオブジェクトの更新
 			}
-			else
+			//gameObjectsの描画
+			for (auto& obj : gameObjects)
 			{
-				it++;
+				obj->Draw(); //ゲームオブジェクトの描画
 			}
-		}
+			for (auto it = gameObjects.begin(); it != gameObjects.end();)
+			{
+				if (!(*it)->IsAlive())
+				{
+					delete* it; //ゲームオブジェクトを削除
+					it = gameObjects.erase(it); //ベクター(配列)から要素を消去
+				
+				}
+				else
+				{
+					it++;
+				}
+				
+			}
 
+
+
+			//裏画面の描画
+			ScreenFlip();
+			WaitTimer(16);
+			prevTime = crrTime; //現在の時間を前回の時間として保存
+			if (ProcessMessage() == -1)
+				break;
+			if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+				break;
 		}
-		
-		
-		//裏画面の描画
-		ScreenFlip();
-		WaitTimer(16);
-		prevTime = crrTime; //現在の時間を前回の時間として保存
-		if (ProcessMessage() == -1)
-			break;
-		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
-			break;
 	}
 
 	DxLib_End();

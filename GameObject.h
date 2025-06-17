@@ -9,7 +9,7 @@ public:
 	virtual ~GameObject();
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
-	bool IsAlive(){ return isAlive_; } 
+	bool IsAlive(){ return isAlive_; }
 	void SetAlive(bool alive) { isAlive_ = alive; }
 };
 extern std::vector<GameObject*> gameObjects;
