@@ -58,8 +58,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	DxInit();
 	crrTime = GetNowCount();
 	prevTime = GetNowCount();
-	int hImage1 = LoadGraph("TITLE.png");
-	int hImage2 = LoadGraph("GameOver.png");
+	int hImage1 = LoadGraph("Aseets//TITLE.png");
+	int hImage2 = LoadGraph("Aseets//GameOver.png");
 	int state = START;
 	Stage* stage = new Stage();
 	while (true)
@@ -73,24 +73,21 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
      //スタート画面の表示
-		/*if (state == START)
+		if (state == START)
 		{
 			DrawExtendGraph(0, 0, WIN_WIDTH, WIN_HEIGHT, hImage1, FALSE);
 		}
 		if (state == START && CheckHitKey(KEY_INPUT_SPACE))
 		{
 			state = PLAY;
-		}*/
+		}
 
 		//ここにやりたい処理を書く
 		//(ここまでやりたい処理を書く)
 		//ゲームオブジェクトの追加
-		/*if (state == PLAY)
+		if (state == PLAY)
 		{
-			
-
-		}*/
-		if (newObjects.size() > 0)
+			if (newObjects.size() > 0)
 		{
 			for (auto& obj : newObjects)
 			{
@@ -122,6 +119,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 				it++;
 			}
 		}
+
+		}
+		
 		
 		//裏画面の描画
 		ScreenFlip();
