@@ -4,13 +4,20 @@
 #include <vector>
 #include "Stage.h"
 
+
+enum STATE
+{
+	START,
+	PLAY,
+	GAMEOVER
+};
 namespace
 {
 	const int  BGCOLOR[3] = { 0,0,0 }; //背景色
 	int crrTime;
 	int prevTime;
+	
 }
-
 std::vector<GameObject*> gameObjects; //ゲームオブジェクトのベクター
 std::vector<GameObject*> newObjects; //ゲームオブジェクトのベクター
 
@@ -51,7 +58,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	DxInit();
 	crrTime = GetNowCount();
 	prevTime = GetNowCount();
-
+	int hImage1 = LoadGraph("TITLE.png");
+	int hImage2 = LoadGraph("GameOver.png");
+	int state = START;
 	Stage* stage = new Stage();
 	while (true)
 	{
@@ -63,9 +72,24 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		gDeltaTime = deltaTime;
 
 
+     //スタート画面の表示
+		/*if (state == START)
+		{
+			DrawExtendGraph(0, 0, WIN_WIDTH, WIN_HEIGHT, hImage1, FALSE);
+		}
+		if (state == START && CheckHitKey(KEY_INPUT_SPACE))
+		{
+			state = PLAY;
+		}*/
+
 		//ここにやりたい処理を書く
 		//(ここまでやりたい処理を書く)
 		//ゲームオブジェクトの追加
+		/*if (state == PLAY)
+		{
+			
+
+		}*/
 		if (newObjects.size() > 0)
 		{
 			for (auto& obj : newObjects)
@@ -75,10 +99,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			}
 			newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
 		}
-		
+
 		//gameObjectsの更新
 		for (auto& obj : gameObjects)
-		{ 
+		{
 			obj->Update(); //ゲームオブジェクトの更新
 		}
 		//gameObjectsの描画

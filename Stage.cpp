@@ -6,6 +6,7 @@
 namespace
 {
     const int ENEMY_NUM = 10*7;
+    const int PLAYER_NUM = 1;
     const int ENEMY_COL_SIZE = 10; //敵の列数
     const int ENEMY_ROW_SIZE = 7; //敵の行数
     const float ENEMY_ALIGN_X = 55.0f; //敵の1匹
@@ -23,11 +24,15 @@ namespace
     }
 }
 Stage::Stage()
-    :GameObject(),player_(nullptr),hBackGround(-1)
+    :GameObject(),player_(nullptr),hBackGround(-1),Enemy_(nullptr),PBullet_(nullptr)
 {
     AddGameObject(this); //ステージオブジェクトをゲームオブジェクトに追加
     player_ = new Player(); //プレイヤーオブジェクト
     enemy_ = std::vector<Enemys*>(ENEMY_NUM);
+    Enemy_ = new Enemys();
+    Player_ = std::vector<Player*>(PLAYER_NUM);
+   
+
     
     for (int i = 0; i < ENEMY_NUM; i++) //敵をENEMY_NUMの数だけ描画させる
     {
@@ -54,8 +59,8 @@ Stage::~Stage()
 void Stage::Update()
 {
     //ここに当たり判定を描きたい
-    
-        std::vector<Bullet*> bullets = player_->GetAllBullets();
+       std::vector<Bullet*> bullets = player_->GetAllBullets();
+       std::vector<Bullet*> ebullets = Enemy_->GetAll_ENEMY_Bullets();
         for (auto& e : enemy_)
         {
             for (auto& b : bullets)
@@ -75,7 +80,26 @@ void Stage::Update()
                 }
             }
         }
+        for (auto& p : Player_)
+        {
 
+            for (auto& b : ebullets)
+            {
+                if (b->IsFired() && p->IsAlive()) {
+                    if (IntersepctRect(p->GetRect(), b->GetRect()))
+                    {
+                        if (b->IsFired())
+                        {
+                            b->SetFired(false);
+                            if (p->IsAlive())
+                            {
+                                p->SetAlive(false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
   }
 
 void Stage::Draw()

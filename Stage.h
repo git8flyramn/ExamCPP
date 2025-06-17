@@ -10,7 +10,10 @@ class Stage :
 {
 private:
     Player* player_; //プレイヤーオブジェクト
+    Player* PBullet_;
+    Enemys* Enemy_;
     std::vector<Enemys*> enemy_;//敵オブジェクト <Enemys*> はEnemys*の配列を持っている
+    std::vector<Player*> Player_;
     int hBackGround;
 public:
     Stage();

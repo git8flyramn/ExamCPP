@@ -10,7 +10,7 @@ EnemyBeam::EnemyBeam()
 	:GameObject(), hImage_(-1), pos_({ -10,-10 }), speed_(ENEMY_BEAM_INIT_SPEED),
 	isFired_(true), imageSize_({ ENEMY_BEAM_IMAGE_WIDTH, ENEMY_BEAM_IMAGE_HEIGHT })
 {
-	hImage_ = LoadGraph("Aseets/ebeam.png");
+	hImage_ = LoadGraph("Aseets/ebeams.png");
 
 	AddGameObject(this);
 }

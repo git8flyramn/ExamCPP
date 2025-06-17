@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "global.h"
 #include  <vector>
+class Bullet;
 enum ETYPE
 {
     ZAKO, MID, KNIGHT, BOSS, MAX_ETYPE
@@ -20,7 +21,7 @@ public:
     //void SetID(int id) { ID_ = id; } //“G‚ÌID‚ğİ’è
     void SetMaxMoveX(float xmax) { xMoveMax_ = xmax; }
     void SetXorigin(float x) { xorigin_ = x; }
-protected:
+    std::vector<Bullet*> GetAll_ENEMY_Bullets() const { return ebullets_; } //‘S‚Ä‚Ì’e‚ğæ“¾
 private:
     int hImage_;  //“G‚Ì‰æ‘œƒnƒ“ƒhƒ‹
     float x_, y_; //“G‚ÌÀ•W
@@ -29,7 +30,8 @@ private:
     float xorigin_;
     float moveTime_;
     Point imageSize_;
-
+    std::vector<Bullet*> ebullets_;
     int ID_; //“G‚ÌID
     ETYPE type_; //“G‚Ìí—Ş
+   
 };
