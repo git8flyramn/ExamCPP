@@ -97,3 +97,15 @@ void Enemys::Draw()
 		hImage_, TRUE);
 }
 
+Bullet* Enemys::GetActiveBullet()
+{
+	for (auto& itr : ebullets_)
+	{
+		if (!itr->IsFired())
+		{
+			return itr;
+		}
+	}
+	return nullptr;
+}
+

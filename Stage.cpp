@@ -22,13 +22,17 @@ namespace
  
         return xOverlap && yOverlap;
     }
+  
+
 }
 Stage::Stage()
     :GameObject(),player_(nullptr),hBackGround(-1)
 {
     AddGameObject(this); //ステージオブジェクトをゲームオブジェクトに追加
     player_ = new Player(); //プレイヤーオブジェクト
+    Enemy_ = new Enemys();
     enemy_ = std::vector<Enemys*>(ENEMY_NUM);
+    Player_ = std::vector<Player*>(PLAYER_NUM);
    
    
 
@@ -45,7 +49,7 @@ Stage::Stage()
         enemy_[i]->SetXorigin(col * ENEMY_ALIGN_X + ENEMY_LEFT_MARGIN);
 
     }
-    hBackGround = LoadGraph("Aseets///bg.png");
+    hBackGround = LoadGraph("Aseets//bg.png");
 
 
 }
@@ -79,7 +83,7 @@ void Stage::Update()
             }
         }
     }
-  
+    Stage::PlayerVSEnemyBeams();
 } 
 
 void Stage::Draw()
@@ -87,4 +91,29 @@ void Stage::Draw()
     SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
     DrawExtendGraph(0, 0, WIN_WIDTH, WIN_HEIGHT, hBackGround, FALSE);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND ,0);
+}
+
+void Stage::PlayerVSEnemyBeams()
+{
+    std::vector<Bullet*> ebullets = Enemy_->GetAllBullets();
+    for (auto& p : Player_)
+    {
+        for (auto& b : ebullets)
+        {
+            if (b->IsFired() && p->IsAlive()) {
+                if (IntersepctRect(p->GetRect(), b->GetRect()))
+                {
+                    if (b->IsFired())
+                    {
+                        b->SetFired(false);
+                        if (p->IsAlive())
+                        {
+                            p->SetAlive(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+   
 }

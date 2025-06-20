@@ -21,6 +21,8 @@ public:
     //void SetID(int id) { ID_ = id; } //敵のIDを設定
     void SetMaxMoveX(float xmax) { xMoveMax_ = xmax; }
     void SetXorigin(float x) { xorigin_ = x; }
+    Bullet* GetActiveBullet();
+    std::vector<Bullet*> GetAllBullets() const { return ebullets_; } //全ての弾を取得
 private:
     int hImage_;  //敵の画像ハンドル
     float x_, y_; //敵の座標
@@ -30,6 +32,8 @@ private:
     float moveTime_;
     Point imageSize_;
     int ID_; //敵のID
+    std::vector<Bullet*> ebullets_; //エネミーが発射した弾のベクター
     ETYPE type_; //敵の種類
+ 
 
 };

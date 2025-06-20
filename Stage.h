@@ -11,11 +11,14 @@ class Stage :
 private:
     Player* player_; //プレイヤーオブジェクト
     std::vector<Enemys*> enemy_;//敵オブジェクト <Enemys*> はEnemys*の配列を持っている
+    std::vector<Player*> Player_;
+    Enemys* Enemy_;
     int hBackGround;
 public:
     Stage();
     ~Stage();
     void Update() override;
     void Draw() override;
+    void PlayerVSEnemyBeams();
 };
 

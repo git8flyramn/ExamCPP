@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Input.h"
 #include "Bullet.h"
+#include "Effect.h"
 namespace
 {
 	const float PLAYER_INIT_SPEED = 200.0f; //初期移動速度
@@ -42,6 +43,11 @@ Player::Player()
 Player::~Player()
 {
 	//画像サイズを解放(後で書く
+	new Effect({ x_,y_ });
+	if (hImage_ != -1)
+	{
+		DeleteGraph(hImage_);//画像のハンドルを解放
+	}
 }
 
 void Player::Update()

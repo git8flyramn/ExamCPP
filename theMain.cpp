@@ -59,7 +59,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	crrTime = GetNowCount();
 	prevTime = GetNowCount();
 	int hImage1 = LoadGraph("Aseets//TITLE.png");
-	int hImage2 = LoadGraph("Aseets//GameOver.png");
+	//int hImage2 = LoadGraph("Aseets//GameOver.png");
 	int state = START;
 	Stage* stage = new Stage();
 	while (true)
@@ -80,47 +80,49 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		if (state == START && CheckHitKey(KEY_INPUT_SPACE))
 		{
 			state = PLAY;
-		}
-
-		//ここにやりたい処理を書く
+			//ここにやりたい処理を書く
 		//(ここまでやりたい処理を書く)
 		//ゲームオブジェクトの追加
-		if (state == PLAY)
-		{
-			if (newObjects.size() > 0)
+			if (state == PLAY)
 			{
-				for (auto& obj : newObjects)
+				if (newObjects.size() > 0)
 				{
-					gameObjects.push_back(obj); //新しいゲームオブジェクトを追加
+					for (auto& obj : newObjects)
+					{
+						gameObjects.push_back(obj); //新しいゲームオブジェクトを追加
+
+					}
+					newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
+				}
+
+				//gameObjectsの更新
+				for (auto& obj : gameObjects)
+				{
+					obj->Update(); //ゲームオブジェクトの更新
+				}
+				//gameObjectsの描画
+				for (auto& obj : gameObjects)
+				{
+					obj->Draw(); //ゲームオブジェクトの描画
+				}
+				for (auto it = gameObjects.begin(); it != gameObjects.end();)
+				{
+					if (!(*it)->IsAlive())
+					{
+						delete* it; //ゲームオブジェクトを削除
+						it = gameObjects.erase(it); //ベクター(配列)から要素を消去
+
+					}
+					else
+					{
+						it++;
+					}
 
 				}
-				newObjects.clear(); //新しいゲームオブジェクトのベクターをクリア
 			}
+		}
 
-			//gameObjectsの更新
-			for (auto& obj : gameObjects)
-			{
-				obj->Update(); //ゲームオブジェクトの更新
-			}
-			//gameObjectsの描画
-			for (auto& obj : gameObjects)
-			{
-				obj->Draw(); //ゲームオブジェクトの描画
-			}
-			for (auto it = gameObjects.begin(); it != gameObjects.end();)
-			{
-				if (!(*it)->IsAlive())
-				{
-					delete* it; //ゲームオブジェクトを削除
-					it = gameObjects.erase(it); //ベクター(配列)から要素を消去
-				
-				}
-				else
-				{
-					it++;
-				}
-				
-			}
+		
 
 
 
@@ -132,7 +134,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 				break;
 			if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
 				break;
-		}
+		
 	}
 
 	DxLib_End();
